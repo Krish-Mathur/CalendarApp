@@ -64,4 +64,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     public void weeklyAction(View view) {
         startActivity(new Intent(this, activity_week_view.class));
     }
+
+    public void listAction(View view) {
+        startActivity(new Intent(this, activity_list_view.class));
+    }
 }

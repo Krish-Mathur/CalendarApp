@@ -2,4 +2,5 @@
     <string name="app_name">CalendarAppTrial</string>
     <string name="backward"><![CDATA[<-]]></string>
     <string name="forward"><![CDATA[->]]></string>
+    <string name="textview">TextView</string>
 </resources>
