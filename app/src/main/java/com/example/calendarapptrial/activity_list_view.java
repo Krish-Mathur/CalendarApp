@@ -3,6 +3,7 @@ package com.example.calendarapptrial;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,8 +15,15 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class activity_list_view extends Activity implements CustomAdapter.OnItemClickListener {
-    private ArrayList<String> items;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class activity_list_view extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
     private CustomAdapter itemsAdapter;
     private ListView lvItems;
 
@@ -24,15 +32,13 @@ public class activity_list_view extends Activity implements CustomAdapter.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         lvItems = findViewById(R.id.lvItems);
-        items = new ArrayList<>();
-        itemsAdapter = new CustomAdapter(this, items);
+
+        TaskManager taskManager = TaskManager.getInstance(); // Initialize TaskManager
+
+        // Retrieve tasks from TaskManager
+        itemsAdapter = new CustomAdapter((Context) this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         lvItems.setAdapter(itemsAdapter);
-
-        // Sample items
-        items.add("First Item");
-        items.add("Second Item");
-
         setupListViewListener();
     }
 
@@ -42,8 +48,8 @@ public class activity_list_view extends Activity implements CustomAdapter.OnItem
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
-                        // Remove the item within array at position
-                        items.remove(pos);
+                        // Remove the item within TaskManager at position
+                        TaskManager.getInstance().removeTask(pos);
                         // Refresh the adapter
                         itemsAdapter.notifyDataSetChanged();
                         // Return true consumes the long click event (marks it handled)
@@ -61,18 +67,26 @@ public class activity_list_view extends Activity implements CustomAdapter.OnItem
     }
 
     private void showEditTaskDialog(final int position) {
+        // Retrieve the task from TaskManager based on position
+        Task currentTask = TaskManager.getInstance().getTasks().get(position);
+        String currentTaskDescription = currentTask.getDescription();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Edit Task");
 
         final EditText input = new EditText(this);
-        input.setText(items.get(position));
+        input.setText(currentTaskDescription);
         builder.setView(input);
 
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String editedText = input.getText().toString();
-                items.set(position, editedText);
+
+                // Update TaskManager after editing
+                TaskManager.getInstance().editTask(position, editedText);
+
+                // Refresh the adapter
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -87,12 +101,23 @@ public class activity_list_view extends Activity implements CustomAdapter.OnItem
         builder.show();
     }
 
+
+
     public void onAddItem(View v) {
         EditText etNewItem = findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
-        etNewItem.setText("");
+
+        // Check if the itemText is not empty before adding
+        if (!itemText.isEmpty()) {
+            //itemsAdapter.add(itemText);
+
+            // Add task to TaskManager
+            TaskManager.getInstance().addTask(itemText);
+
+            etNewItem.setText("");
+        }
     }
+
 
     @Override
     public void onItemClick(int position) {

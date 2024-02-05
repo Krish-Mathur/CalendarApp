@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.calendarapptrial.R;
-
 import java.util.ArrayList;
 
 // CustomAdapter.java
-public class CustomAdapter extends ArrayAdapter<String> {
+public class CustomAdapter extends ArrayAdapter<Task> {
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
@@ -29,7 +28,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
         mListener = listener;
     }
 
-    public CustomAdapter(Context context, ArrayList<String> items) {
+    public CustomAdapter(Context context, ArrayList<Task> items) {
         super(context, 0, items);
     }
 
@@ -37,7 +36,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // Get the data item for this position
-        String item = getItem(position);
+        Task task = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -49,13 +48,15 @@ public class CustomAdapter extends ArrayAdapter<String> {
         TextView tvItem = convertView.findViewById(R.id.tvItem);
 
         // Populate the data into the template view using the data object
-        tvItem.setText(item);
+        tvItem.setText(task.getDescription());
+        checkboxItem.setChecked(task.isChecked());
 
         // Set click listeners for both short and long clicks
         checkboxItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Handle checkbox click here (update task completion status)
+                task.setChecked(!task.isChecked());
             }
         });
 
@@ -68,8 +69,6 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 }
             }
         });
-
-
 
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
