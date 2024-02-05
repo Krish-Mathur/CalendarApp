@@ -7,10 +7,11 @@ import java.util.ArrayList;
 public class Event {
 
     public static ArrayList<Event> eventsList = new ArrayList<>();
+    public static ArrayList<Event> deletedList = new ArrayList<>();
     public static ArrayList<Event> eventsForDate(LocalDate date) {
         ArrayList<Event> events = new ArrayList<>();
         for (Event event : eventsList) {
-            if (event.getDate().equals(date)) {
+            if (event.getDate().equals(date) && !events.contains(event) && !deletedList.contains(event)) {
                 events.add(event);
             }
         }

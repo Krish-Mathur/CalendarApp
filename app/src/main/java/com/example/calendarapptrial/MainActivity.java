@@ -68,4 +68,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     public void listAction(View view) {
         startActivity(new Intent(this, activity_list_view.class));
     }
+    public void backToHome(View view) {
+        //startActivity(new Intent(this, activity_list_view.class));
+    }
 }

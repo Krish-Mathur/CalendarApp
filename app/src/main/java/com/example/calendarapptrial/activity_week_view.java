@@ -1,8 +1,11 @@
 package com.example.calendarapptrial;
 
+import static android.text.method.TextKeyListener.clear;
 import static com.example.calendarapptrial.CalendarUtils.daysInMonthArray;
 import static com.example.calendarapptrial.CalendarUtils.daysInWeekArray;
 import static com.example.calendarapptrial.CalendarUtils.monthYearFromDate;
+
+import static java.util.Collections.addAll;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class activity_week_view extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
@@ -68,13 +72,12 @@ public class activity_week_view extends AppCompatActivity implements CalendarAda
     }
 
     private void setEventAdapter() {
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
+        List<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
         eventListView.setAdapter(eventAdapter);
     }
 
     public void newEventAction(View view) {
         startActivity(new Intent(this, activity_event_edit.class));
-
     }
 }

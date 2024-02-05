@@ -8,12 +8,40 @@
     android:orientation="vertical"
     tools:context=".activity_week_view">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:textColor="@color/blue"
+        android:background="@null"
+        android:textStyle="italic"
+        android:textSize="10sp"
+        android:onClick="listAction"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Exam Info and Dates"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="Select a date and add an exam!"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom ="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -128,5 +156,5 @@
         android:id="@+id/eventListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"/>
+        android:layout_weight="5" />
 </LinearLayout>
