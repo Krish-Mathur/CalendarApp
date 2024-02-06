@@ -1,101 +1,158 @@
 package com.example.calendarapptrial;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
-import java.util.Calendar;
+import android.widget.EditText;
+import android.widget.ListView;
 
-public class assignment_list extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
-    private DatePickerDialog datePickerDialog;
-    private Button dateButton;
+import com.example.calendarapptrial.CustomAdapter;
+import com.example.calendarapptrial.Task;
+import com.example.calendarapptrial.TaskManager3;
+
+import java.util.ArrayList;
+
+public class assignment_list extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
+    private CustomAdapter itemsAdapter;
+    private ListView lvItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment_list);
-        initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
+        lvItems = findViewById(R.id.lvItems);
+
+        TaskManager3 taskManager = TaskManager3.getInstance(); // Initialize TaskManager2
+
+        // Retrieve tasks from TaskManager2
+        itemsAdapter = new CustomAdapter(this, (ArrayList<Task>) taskManager.getTasks());
+        itemsAdapter.setOnItemClickListener(this);
+        lvItems.setAdapter(itemsAdapter);
+        setupListViewListener();
     }
 
-    private String getTodaysDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
-    }
+    private void setupListViewListener() {
+        lvItems.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> adapter,
+                                                   View item, int pos, long id) {
+                        // Remove the item within TaskManager2 at position
+                        TaskManager3.getInstance().removeTask(pos);
+                        // Refresh the adapter
+                        itemsAdapter.notifyDataSetChanged();
+                        // Return true consumes the long click event (marks it handled)
+                        return true;
+                    }
+                });
 
-    private void initDatePicker()
-    {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
-        {
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day)
-            {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText(date);
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+                // Edit the task when an item is clicked
+                showEditTaskDialog(position);
             }
-        };
-
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        //int style = AlertDialog.THEME_HOLO_LIGHT;
-
-        datePickerDialog = new DatePickerDialog(this, /*style,*/ dateSetListener, year, month, day);
-        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
+        });
     }
 
-    private String makeDateString(int day, int month, int year)
-    {
-        return getMonthFormat(month) + " " + day + " " + year;
+    private void showEditTaskDialog(final int position) {
+        // Retrieve the task from TaskManager2 based on position
+        Task currentTask = TaskManager3.getInstance().getTasks().get(position);
+        String currentTaskDescription = currentTask.getDescription();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Assignment");
+
+        final EditText input = new EditText(this);
+        input.setText(currentTaskDescription);
+        builder.setView(input);
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String editedText = input.getText().toString();
+
+                // Update TaskManager2 after editing
+                TaskManager3.getInstance().editTask(position, editedText);
+
+                // Refresh the adapter
+                itemsAdapter.notifyDataSetChanged();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
-    private String getMonthFormat(int month)
-    {
-        if(month == 1)
-            return "JAN";
-        if(month == 2)
-            return "FEB";
-        if(month == 3)
-            return "MAR";
-        if(month == 4)
-            return "APR";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUN";
-        if(month == 7)
-            return "JUL";
-        if(month == 8)
-            return "AUG";
-        if(month == 9)
-            return "SEP";
-        if(month == 10)
-            return "OCT";
-        if(month == 11)
-            return "NOV";
-        if(month == 12)
-            return "DEC";
+    public void onAddItem(View v) {
+        // Inflate the dialog layout
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_assignment, null);
 
-        //default should never happen
-        return "JAN";
+        // Initialize EditText fields from the dialog layout
+        EditText etTitle = dialogView.findViewById(R.id.etTitle);
+        EditText etDate = dialogView.findViewById(R.id.etDate);
+        EditText etClass = dialogView.findViewById(R.id.etClass);
+
+
+        // Initialize the Save and Cancel buttons
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Assignment");
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Retrieve input values from EditText fields
+                String assignment = etTitle.getText().toString();
+                String courseName = etClass.getText().toString();
+                String date = etDate.getText().toString();
+
+                // Create a new class entry with the retrieved values
+                String classDetails = "Assignment: " + assignment + "\n" + "Course: " + courseName + "\n" + "Due Date: " + date; // Concatenate other details as needed
+                TaskManager3.getInstance().addTask(classDetails);
+
+                // Refresh the adapter
+                itemsAdapter.notifyDataSetChanged();
+
+                dialog.dismiss(); // Dismiss the dialog
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss(); // Dismiss the dialog
+            }
+        });
+
+        dialog.show();
     }
 
-    public void openDatePicker(View view)
-    {
-        datePickerDialog.show();
+
+    @Override
+    public void onItemClick(int position) {
+        // Handle item click here (edit task)
+        showEditTaskDialog(position);
+    }
+    public void backToHomeClasses(View view) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
