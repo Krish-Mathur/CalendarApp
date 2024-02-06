@@ -13,14 +13,14 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calendarapptrial.CustomAdapter;
+import com.example.calendarapptrial.CustomAdapter2;
 import com.example.calendarapptrial.Task;
 import com.example.calendarapptrial.TaskManager2;
 
 import java.util.ArrayList;
 
-public class class_action_view extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
-    private CustomAdapter itemsAdapter;
+public class class_action_view extends AppCompatActivity implements CustomAdapter2.OnItemClickListener {
+    private CustomAdapter2 itemsAdapter;
     private ListView lvItems;
 
     @Override
@@ -32,7 +32,7 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
         TaskManager2 taskManager = TaskManager2.getInstance(); // Initialize TaskManager2
 
         // Retrieve tasks from TaskManager2
-        itemsAdapter = new CustomAdapter(this, (ArrayList<Task>) taskManager.getTasks());
+        itemsAdapter = new CustomAdapter2(this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         lvItems.setAdapter(itemsAdapter);
         setupListViewListener();
