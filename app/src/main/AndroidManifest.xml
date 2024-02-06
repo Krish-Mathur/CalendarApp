@@ -17,6 +17,9 @@
             android:name=".activity_list_view"
             android:exported="false" />
 
+        <activity android:name=".class_action_view"
+            android:exported="false" />
+
         <activity
             android:name=".activity_event_edit"
             android:exported="false" />
