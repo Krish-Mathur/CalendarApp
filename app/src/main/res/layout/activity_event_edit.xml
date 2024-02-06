@@ -103,11 +103,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:textColor="@color/blue"
-        android:background="@null"
+        android:textColor="@color/white"
+        android:background="@color/proj1Blue"
         android:textStyle="bold"
         android:onClick="saveEventAction"
         android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
         android:textSize="20sp"/>
 
     <TextView

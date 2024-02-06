@@ -86,4 +86,7 @@ public class activity_week_view extends AppCompatActivity implements CalendarAda
     public void newEventAction(View view) {
         startActivity(new Intent(this, activity_event_edit.class));
     }
+    public void backToHome(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back to Home"
-        android:textColor="@color/blue"
+        android:textColor="@color/proj1Blue"
         android:background="@null"
         android:textStyle="italic"
-        android:textSize="10sp"
-        android:onClick="listAction"
+        android:textSize="15sp"
+        android:onClick="backToHome"
         android:layout_marginLeft="20dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/backward"
-            android:textColor="@color/blue"
+            android:textColor="@color/proj1Blue"
             android:background="@null"
             android:textStyle="bold"
             android:onClick="previousWeekAction"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/forward"
-            android:textColor="@color/blue"
+            android:textColor="@color/proj1Blue"
             android:background="@null"
             android:textStyle="bold"
             android:onClick="nextWeekAction"
@@ -143,11 +143,11 @@
         android:layout_height="0dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="New Event"
-        android:textColor="@color/blue"
-        android:background="@null"
+        android:textColor="@color/white"
+        android:background="@color/proj1Blue"
         android:textStyle="bold"
         android:onClick="newEventAction"
         android:layout_gravity="center"

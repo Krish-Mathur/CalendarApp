@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -123,5 +124,8 @@ public class activity_list_view extends AppCompatActivity implements CustomAdapt
     public void onItemClick(int position) {
         // Handle item click here (edit task)
         showEditTaskDialog(position);
+    }
+    public void backToHomeToDo(View view) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
