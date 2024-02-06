@@ -8,7 +8,15 @@
         android:id="@+id/etCourseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Name and Section"
+        android:hint="Course Name"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <EditText
+        android:id="@+id/etCourseSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Section"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"/>
 

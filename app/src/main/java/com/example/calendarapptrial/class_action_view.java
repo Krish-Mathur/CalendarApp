@@ -103,6 +103,7 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
 
         // Initialize EditText fields from the dialog layout
         EditText etCourseName = dialogView.findViewById(R.id.etCourseName);
+        EditText etCourseSection = dialogView.findViewById(R.id.etCourseSection);
         EditText etTime = dialogView.findViewById(R.id.etTime);
         EditText etProfessor = dialogView.findViewById(R.id.etProfessor);
         EditText etDays = dialogView.findViewById(R.id.etDays);
@@ -123,13 +124,14 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
             public void onClick(View v) {
                 // Retrieve input values from EditText fields
                 String courseName = etCourseName.getText().toString();
+                String courseSection = etCourseSection.getText().toString();
                 String time = etTime.getText().toString();
                 String professor = etProfessor.getText().toString();
                 String days = etDays.getText().toString();
                 String location = etLocation.getText().toString();
 
                 // Create a new class entry with the retrieved values
-                String classDetails = "Class: " + courseName + "\n" + "Professor: " + professor + "\n" + "Time: " + time + "\n" + "Days: " + days + "\n" + "Location: " + location; // Concatenate other details as needed
+                String classDetails = "Class: " + courseName + "\n" + "Section: " + courseSection + "\n" + "Professor: " + professor + "\n" + "Time: " + time + "\n" + "Days: " + days + "\n" + "Location: " + location; // Concatenate other details as needed
                 TaskManager2.getInstance().addTask(classDetails);
 
                 // Refresh the adapter
