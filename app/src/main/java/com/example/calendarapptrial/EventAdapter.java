@@ -39,10 +39,17 @@ public class EventAdapter extends ArrayAdapter<Event> {
         }
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
         String eventTitle = event.getName();
+
         TextView secondCellTV = convertView.findViewById(R.id.secondCellTV);
         String subTitle = "Exam Time: " + CalendarUtils.formattedTime(event.getTime());
+
+        TextView locationCellTV = convertView.findViewById(R.id.locationCellTV);
+        String locationTitle = "Location: " + event.getEventLocation();
+
         eventCellTV.setText(eventTitle);
+
         secondCellTV.setText(subTitle);
+        locationCellTV.setText(locationTitle);
         View finalConvertView = convertView;
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

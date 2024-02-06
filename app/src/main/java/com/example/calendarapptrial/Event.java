@@ -20,11 +20,13 @@ public class Event {
     private String name;
     private LocalDate date;
     private LocalTime time;
+    private String eventLocation;
 
-    public Event(String name, LocalDate date, LocalTime time) {
+    public Event(String name, LocalDate date, LocalTime time, String eventLocation) {
         this.name = name;
         this.date = date;
         this.time = time;
+        this.eventLocation = eventLocation;
     }
     public String getName() {
         return name;
@@ -49,4 +51,6 @@ public class Event {
     public void setTime(LocalTime time) {
         this.time = time;
     }
+    public String getEventLocation() { return eventLocation; }
+    public void setEventLocation() { this.eventLocation = eventLocation; }
 }

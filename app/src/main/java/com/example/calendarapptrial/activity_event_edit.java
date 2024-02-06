@@ -23,8 +23,8 @@ public class activity_event_edit extends AppCompatActivity {
     Button timeButton;
     int hour, minute;
     String timeText;
-    private EditText eventNameET;
-    private TextView eventDateTV, eventTimeTV;
+    private EditText eventNameET, eventLocationET;
+    private TextView eventDateTV, eventTimeTV, eventLocationTV;
     private LocalTime localTimeDefault;
     private LocalTime time;
     private ListView eventListView;
@@ -43,6 +43,8 @@ public class activity_event_edit extends AppCompatActivity {
         eventNameET = findViewById(R.id.eventNameET);
         eventDateTV = findViewById(R.id.eventDateTV);
         eventTimeTV = findViewById(R.id.eventTimeTV);
+        eventLocationTV = findViewById(R.id.eventLocationTV);
+        eventLocationET = findViewById(R.id.eventLocationET);
     }
 
 
@@ -74,7 +76,8 @@ public class activity_event_edit extends AppCompatActivity {
 
     public void saveEventAction(View view) {
         String eventName = eventNameET.getText().toString();
-        Event newEvent = new Event(eventName, CalendarUtils.selectedDate, localTimeDefault);
+        String eventLocation = eventLocationET.getText().toString();
+        Event newEvent = new Event(eventName, CalendarUtils.selectedDate, localTimeDefault, eventLocation);
         Event.eventsList.add(newEvent);
         finish();
     }
