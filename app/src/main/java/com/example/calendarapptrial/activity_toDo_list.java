@@ -16,25 +16,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class activity_toDo_list extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
     private CustomAdapter itemsAdapter;
-    private ListView lvItems;
+    private ListView listItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        lvItems = findViewById(R.id.lvItems);
+        listItems = findViewById(R.id.lvItems);
 
         TaskManager taskManager = TaskManager.getInstance(); // Initialize TaskManager
 
         // Retrieve tasks from TaskManager
         itemsAdapter = new CustomAdapter((Context) this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
-        lvItems.setAdapter(itemsAdapter);
+        listItems.setAdapter(itemsAdapter);
         setupListViewListener();
     }
 
     private void setupListViewListener() {
-        lvItems.setOnItemLongClickListener(
+        listItems.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
@@ -48,7 +48,7 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
                     }
                 });
 
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
                 // Edit the task when an item is clicked

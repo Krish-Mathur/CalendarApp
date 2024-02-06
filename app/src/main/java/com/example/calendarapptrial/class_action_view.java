@@ -1,6 +1,5 @@
 package com.example.calendarapptrial;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +11,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.calendarapptrial.CustomAdapter2;
-import com.example.calendarapptrial.Task;
-import com.example.calendarapptrial.TaskManager2;
 
 import java.util.ArrayList;
 
