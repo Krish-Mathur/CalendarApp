@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Name:"
         android:textSize="20sp"
         android:textAlignment="center"
@@ -39,16 +39,31 @@
         android:textAlignment="center"
         android:textColor="@color/black"/>
 
+
     <TextView
-        android:id="@+id/eventTimeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Time:"
-        android:textSize="20sp"
+        android:textStyle="italic"
+        android:text="Click to select time of exam:"
+        android:textSize="15sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/timeButton"
+        android:onClick="popTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Exam Time"
+        android:textSize="20dp"
+        android:width="200dp"
+        android:height="100dp"
+        android:background="#1575eb"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
 
     <Button
         android:layout_marginTop="20dp"
@@ -61,6 +76,18 @@
         android:onClick="saveEventAction"
         android:layout_gravity="center"
         android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/eventTimeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Time:"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"/>
 
 
 </LinearLayout>

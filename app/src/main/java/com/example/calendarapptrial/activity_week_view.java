@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +25,7 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.ArrayAdapter;
 
 public class activity_week_view extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
@@ -41,6 +46,7 @@ public class activity_week_view extends AppCompatActivity implements CalendarAda
         monthYearText = findViewById(R.id.monthYearTV);
         eventListView = findViewById(R.id.eventListView);
     }
+
     private void setWeekView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);

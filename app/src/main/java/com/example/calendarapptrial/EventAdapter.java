@@ -2,6 +2,8 @@ package com.example.calendarapptrial;
 
 import static com.example.calendarapptrial.Event.deletedList;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,9 +38,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
         }
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
-        String eventTitle = event.getName() + " " + CalendarUtils.formattedTime(event.getTime());
+        String eventTitle = event.getName();
+        TextView secondCellTV = convertView.findViewById(R.id.secondCellTV);
+        String subTitle = "Exam Time: " + CalendarUtils.formattedTime(event.getTime());
         eventCellTV.setText(eventTitle);
-
+        secondCellTV.setText(subTitle);
+        View finalConvertView = convertView;
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -56,4 +62,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public void remove(@Nullable Event object) {
         super.remove(object);
     }
+
+
 }
