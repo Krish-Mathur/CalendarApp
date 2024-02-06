@@ -1,30 +1,20 @@
 package com.example.calendarapptrial;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class activity_list_view extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
+public class activity_toDo_list extends AppCompatActivity implements CustomAdapter.OnItemClickListener {
     private CustomAdapter itemsAdapter;
     private ListView lvItems;
 

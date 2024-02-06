@@ -38,10 +38,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         final LocalDate date = days.get(position);
         if (date == null) {
-            holder.dayOfMonth.setText("");
+            holder.monthDate.setText("");
         } else {
-            holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
-            if (date.equals(CalendarUtils.selectedDate)) {
+            holder.monthDate.setText(String.valueOf(date.getDayOfMonth()));
+            if (date.equals(CalendarUtils.dateSelected)) {
                 holder.parentView.setBackgroundColor(Color.LTGRAY);
             }
         }

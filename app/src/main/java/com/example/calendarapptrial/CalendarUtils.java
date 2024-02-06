@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CalendarUtils {
-    public static LocalDate selectedDate;
+    public static LocalDate dateSelected;
 
     public static String formattedDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
@@ -29,14 +29,14 @@ public class CalendarUtils {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
         int daysInMonth = yearMonth.lengthOfMonth();
-        LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
+        LocalDate firstOfMonth = CalendarUtils.dateSelected.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
         for (int i = 1; i <= 42; i++) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add(null);
             } else {
-                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(), selectedDate.getMonth(),i - dayOfWeek));
+                daysInMonthArray.add(LocalDate.of(dateSelected.getYear(), dateSelected.getMonth(),i - dayOfWeek));
             }
         }
         return daysInMonthArray;

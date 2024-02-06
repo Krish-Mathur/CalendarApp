@@ -16,16 +16,16 @@
             android:name=".assignment_list"
             android:exported="false" />
         <activity
-            android:name=".activity_list_view"
+            android:name=".activity_toDo_list"
             android:exported="false" />
         <activity
             android:name=".class_action_view"
             android:exported="false" />
         <activity
-            android:name=".activity_event_edit"
+            android:name=".activity_exam_event"
             android:exported="false" />
         <activity
-            android:name=".activity_week_view"
+            android:name=".activity_exam_page"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
