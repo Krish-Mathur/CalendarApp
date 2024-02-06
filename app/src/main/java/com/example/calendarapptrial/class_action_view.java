@@ -3,6 +3,7 @@ package com.example.calendarapptrial;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -153,5 +154,8 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
     public void onItemClick(int position) {
         // Handle item click here (edit task)
         showEditTaskDialog(position);
+    }
+    public void backToHomeClasses(View view) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

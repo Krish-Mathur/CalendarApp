@@ -4,16 +4,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:id="@+id/toDoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Classes"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="@color/blue"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Classes"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/proj1Blue"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="170dp"
+            android:background="@null"
+            android:gravity="top"
+            android:onClick="backToHomeClasses"
+            android:text="Back to Home"
+            android:textColor="@color/proj1Blue"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/divAlign"
@@ -36,15 +56,20 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Class"
         android:id="@+id/btnAddItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:onClick="onAddItem"
-        android:background="@color/blue"
-        android:textColor="@color/white"/>
+        android:background="@color/proj1Blue"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"/>
 
 </RelativeLayout>
