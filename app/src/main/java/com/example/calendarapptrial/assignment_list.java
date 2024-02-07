@@ -26,7 +26,6 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
 
         TaskManager3 taskManager = TaskManager3.getInstance(); // initialize TaskManager
 
-        //get tasks from TaskManager
         itemsAdapter = new CustomAdapter(this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         lvItems.setAdapter(itemsAdapter);
@@ -39,11 +38,8 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
-                        //remove item at position
                         TaskManager3.getInstance().removeTask(pos);
-                        //refresh adapter
                         itemsAdapter.notifyDataSetChanged();
-                        //returning true makes the long click handled
                         return true;
                     }
                 });
@@ -51,7 +47,6 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
-                //edit task
                 showEditTaskDialog(position);
             }
         });
@@ -90,16 +85,13 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
     }
 
     public void onAddItem(View v) {
-        //inflate dialog layout
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_assignment, null);
 
-        //get the text edit fields from the pop up
         EditText etTitle = dialogView.findViewById(R.id.etTitle);
         EditText etDate = dialogView.findViewById(R.id.etDate);
         EditText etClass = dialogView.findViewById(R.id.etClass);
 
 
-        //create save and cancel buttons here
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
@@ -112,16 +104,13 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get values from inputs
                 String assignment = etTitle.getText().toString();
                 String courseName = etClass.getText().toString();
                 String date = etDate.getText().toString();
 
-                //new entry with inputs
                 String classDetails = "Assignment: " + assignment + "\n" + "Course: " + courseName + "\n" + "Due Date: " + date; // Concatenate other details as needed
                 TaskManager3.getInstance().addTask(classDetails);
 
-                //adapter refresh
                 itemsAdapter.notifyDataSetChanged();
 
                 dialog.dismiss();
@@ -131,7 +120,7 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); //dismiss dialog
+                dialog.dismiss();
             }
         });
 

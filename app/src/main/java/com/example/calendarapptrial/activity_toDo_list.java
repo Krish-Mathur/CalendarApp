@@ -72,7 +72,6 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
 
                 TaskManager.getInstance().editTask(position, editedText);
 
-                //adapter refresh (required)
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -93,11 +92,8 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
         EditText etNewItem = findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
 
-        //check if the itemText is not empty before add
         if (!itemText.isEmpty()) {
             //itemsAdapter.add(itemText);
-
-            //add task to TaskManager
             TaskManager.getInstance().addTask(itemText);
 
             etNewItem.setText("");

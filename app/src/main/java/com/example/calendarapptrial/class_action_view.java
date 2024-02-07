@@ -26,7 +26,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
 
         TaskManager2 taskManager = TaskManager2.getInstance(); // Initialize TaskManager2
 
-        // Retrieve tasks from TaskManager2
         itemsAdapter = new CustomAdapter2(this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         lvItems.setAdapter(itemsAdapter);
@@ -39,11 +38,8 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
-                        // Remove the item within TaskManager2 at position
                         TaskManager2.getInstance().removeTask(pos);
-                        // Refresh the adapter
                         itemsAdapter.notifyDataSetChanged();
-                        // Return true consumes the long click event (marks it handled)
                         return true;
                     }
                 });
@@ -51,7 +47,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
-                // Edit the task when an item is clicked
                 showEditTaskDialog(position);
             }
         });
@@ -74,10 +69,8 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
             public void onClick(DialogInterface dialog, int which) {
                 String editedText = input.getText().toString();
 
-                //updating task manager
                 TaskManager2.getInstance().editTask(position, editedText);
 
-                //refreshing adapter
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -95,7 +88,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
     public void onAddItem(View v) {
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_edit_class, null);
 
-        //get text inputs from pop up
         EditText etCourseName = dialogView.findViewById(R.id.etCourseName);
         EditText etCourseSection = dialogView.findViewById(R.id.etCourseSection);
         EditText etTime = dialogView.findViewById(R.id.etTime);
@@ -103,7 +95,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
         EditText etDays = dialogView.findViewById(R.id.etDays);
         EditText etLocation = dialogView.findViewById(R.id.etLocation);
 
-        //save and cancel buttons
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
@@ -123,7 +114,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
                 String days = etDays.getText().toString();
                 String location = etLocation.getText().toString();
 
-                //create a new class entry with the retrieved values
                 String classDetails = "Class: " + courseName + "\n" + "Section: " + courseSection + "\n" + "Professor: " + professor + "\n" + "Time: " + time + "\n" + "Days: " + days + "\n" + "Location: " + location; // Concatenate other details as needed
                 TaskManager2.getInstance().addTask(classDetails);
 
