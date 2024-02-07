@@ -6,7 +6,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isChecked = false; // Default value for isChecked
+        this.isChecked = false; //the default value for isChecked
     }
 
     public String getDescription() {

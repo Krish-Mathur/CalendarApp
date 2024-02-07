@@ -24,9 +24,9 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         setContentView(R.layout.activity_assignment_list);
         lvItems = findViewById(R.id.lvItems);
 
-        TaskManager3 taskManager = TaskManager3.getInstance(); // Initialize TaskManager2
+        TaskManager3 taskManager = TaskManager3.getInstance(); // initialize TaskManager
 
-        // Retrieve tasks from TaskManager2
+        //get tasks from TaskManager
         itemsAdapter = new CustomAdapter(this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         lvItems.setAdapter(itemsAdapter);
@@ -39,11 +39,11 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
-                        // Remove the item within TaskManager2 at position
+                        //remove item at position
                         TaskManager3.getInstance().removeTask(pos);
-                        // Refresh the adapter
+                        //refresh adapter
                         itemsAdapter.notifyDataSetChanged();
-                        // Return true consumes the long click event (marks it handled)
+                        //returning true makes the long click handled
                         return true;
                     }
                 });
@@ -51,14 +51,13 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
-                // Edit the task when an item is clicked
+                //edit task
                 showEditTaskDialog(position);
             }
         });
     }
 
     private void showEditTaskDialog(final int position) {
-        // Retrieve the task from TaskManager2 based on position
         Task currentTask = TaskManager3.getInstance().getTasks().get(position);
         String currentTaskDescription = currentTask.getDescription();
 
@@ -74,10 +73,8 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
             public void onClick(DialogInterface dialog, int which) {
                 String editedText = input.getText().toString();
 
-                // Update TaskManager2 after editing
                 TaskManager3.getInstance().editTask(position, editedText);
 
-                // Refresh the adapter
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -93,16 +90,16 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
     }
 
     public void onAddItem(View v) {
-        // Inflate the dialog layout
+        //inflate dialog layout
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_assignment, null);
 
-        // Initialize EditText fields from the dialog layout
+        //get the text edit fields from the pop up
         EditText etTitle = dialogView.findViewById(R.id.etTitle);
         EditText etDate = dialogView.findViewById(R.id.etDate);
         EditText etClass = dialogView.findViewById(R.id.etClass);
 
 
-        // Initialize the Save and Cancel buttons
+        //create save and cancel buttons here
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
@@ -115,26 +112,26 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve input values from EditText fields
+                //get values from inputs
                 String assignment = etTitle.getText().toString();
                 String courseName = etClass.getText().toString();
                 String date = etDate.getText().toString();
 
-                // Create a new class entry with the retrieved values
+                //new entry with inputs
                 String classDetails = "Assignment: " + assignment + "\n" + "Course: " + courseName + "\n" + "Due Date: " + date; // Concatenate other details as needed
                 TaskManager3.getInstance().addTask(classDetails);
 
-                // Refresh the adapter
+                //adapter refresh
                 itemsAdapter.notifyDataSetChanged();
 
-                dialog.dismiss(); // Dismiss the dialog
+                dialog.dismiss();
             }
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); // Dismiss the dialog
+                dialog.dismiss(); //dismiss dialog
             }
         });
 
@@ -144,7 +141,7 @@ public class assignment_list extends AppCompatActivity implements CustomAdapter.
 
     @Override
     public void onItemClick(int position) {
-        // Handle item click here (edit task)
+        //handle item click
         showEditTaskDialog(position);
     }
     public void backToHomeClasses(View view) {

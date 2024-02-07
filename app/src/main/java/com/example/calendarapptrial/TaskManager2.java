@@ -35,5 +35,4 @@ public class TaskManager2 {
         task.setDescription(description);
     }
 
-    // Add a method to get the checked state of a task
 }

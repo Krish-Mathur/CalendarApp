@@ -13,17 +13,16 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-// CustomAdapter.java
 public class CustomAdapter extends ArrayAdapter<Task> {
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    // Add a field to hold the listener
+    //onClick listener
     private OnItemClickListener mListener;
 
-    // Method to set the listener
+    //set listener
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -35,27 +34,26 @@ public class CustomAdapter extends ArrayAdapter<Task> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        // Get the data item for this position
+        //get data of item at this position
         Task task = getItem(position);
 
-        // Check if an existing view is being reused, otherwise inflate the view
+        //inflate view if existing view is not being used
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_layout, parent, false);
         }
 
-        // Lookup view for data population
         CheckBox checkboxItem = convertView.findViewById(R.id.checkboxItem);
         TextView tvItem = convertView.findViewById(R.id.tvItem);
 
-        // Populate the data into the template view using the data object
+        //using data object to populate text
         tvItem.setText(task.getDescription());
         checkboxItem.setChecked(task.isChecked());
 
-        // Set click listeners for both short and long clicks
+        //click listeners
         checkboxItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle checkbox click here (update task completion status)
+                //update task status
                 task.setChecked(!task.isChecked());
             }
         });
@@ -63,7 +61,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Notify the listener about the click event
+                //listener is told about onClick event
                 if (mListener != null) {
                     mListener.onItemClick(position);
                 }
@@ -73,15 +71,14 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                // Handle long click here (delete task)
-                // You can remove the item from the list and notify the adapter
+                //long click listener to remove item
                 remove(getItem(position));
                 notifyDataSetChanged();
                 return true;
             }
         });
 
-        // Return the completed view to render on screen
+        //return completed view
         return convertView;
     }
 }

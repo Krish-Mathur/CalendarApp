@@ -74,10 +74,10 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
             public void onClick(DialogInterface dialog, int which) {
                 String editedText = input.getText().toString();
 
-                // Update TaskManager2 after editing
+                //updating task manager
                 TaskManager2.getInstance().editTask(position, editedText);
 
-                // Refresh the adapter
+                //refreshing adapter
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -93,10 +93,9 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
     }
 
     public void onAddItem(View v) {
-        // Inflate the dialog layout
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_edit_class, null);
 
-        // Initialize EditText fields from the dialog layout
+        //get text inputs from pop up
         EditText etCourseName = dialogView.findViewById(R.id.etCourseName);
         EditText etCourseSection = dialogView.findViewById(R.id.etCourseSection);
         EditText etTime = dialogView.findViewById(R.id.etTime);
@@ -104,7 +103,7 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
         EditText etDays = dialogView.findViewById(R.id.etDays);
         EditText etLocation = dialogView.findViewById(R.id.etLocation);
 
-        // Initialize the Save and Cancel buttons
+        //save and cancel buttons
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
@@ -117,7 +116,6 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve input values from EditText fields
                 String courseName = etCourseName.getText().toString();
                 String courseSection = etCourseSection.getText().toString();
                 String time = etTime.getText().toString();
@@ -125,21 +123,21 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
                 String days = etDays.getText().toString();
                 String location = etLocation.getText().toString();
 
-                // Create a new class entry with the retrieved values
+                //create a new class entry with the retrieved values
                 String classDetails = "Class: " + courseName + "\n" + "Section: " + courseSection + "\n" + "Professor: " + professor + "\n" + "Time: " + time + "\n" + "Days: " + days + "\n" + "Location: " + location; // Concatenate other details as needed
                 TaskManager2.getInstance().addTask(classDetails);
 
-                // Refresh the adapter
+                //refresh adapter
                 itemsAdapter.notifyDataSetChanged();
 
-                dialog.dismiss(); // Dismiss the dialog
+                dialog.dismiss();
             }
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); // Dismiss the dialog
+                dialog.dismiss();
             }
         });
 
@@ -149,9 +147,10 @@ public class class_action_view extends AppCompatActivity implements CustomAdapte
 
     @Override
     public void onItemClick(int position) {
-        // Handle item click here (edit task)
         showEditTaskDialog(position);
     }
+
+    //used for back to home button
     public void backToHomeClasses(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }

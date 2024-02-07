@@ -11,18 +11,20 @@ public class CalendarUtils {
     public static LocalDate dateSelected;
 
     public static String formattedDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
-        return date.format(formatter);
+        //format view of date
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return date.format(dateFormatter);
     }
 
     public static String formattedTime(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
-        return time.format(formatter);
+        //format the view of the time
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        return time.format(timeFormatter);
     }
 
     public static String monthYearFromDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
+        DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(monthYearFormatter);
     }
 
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
@@ -34,8 +36,10 @@ public class CalendarUtils {
 
         for (int i = 1; i <= 42; i++) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
+                //aligns the blank cells with the days of the week
                 daysInMonthArray.add(null);
             } else {
+                //else, add the date normally
                 daysInMonthArray.add(LocalDate.of(dateSelected.getYear(), dateSelected.getMonth(),i - dayOfWeek));
             }
         }

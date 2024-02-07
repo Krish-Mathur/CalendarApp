@@ -36,12 +36,12 @@ public class TaskManager {
         task.setDescription(description);
     }
 
-    // Add a method to get the checked state of a task
+    //get checked state of task
     public boolean isTaskChecked(int position) {
         return tasks.get(position).isChecked();
     }
 
-    // Add a method to set the checked state of a task
+    //set checked state of task
     public void setTaskChecked(int position, boolean isChecked) {
         tasks.get(position).setChecked(isChecked);
     }

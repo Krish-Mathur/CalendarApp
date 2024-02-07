@@ -38,10 +38,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         final LocalDate date = days.get(position);
         if (date == null) {
-            holder.monthDate.setText("");
+            holder.monthDate.setText(""); //sets the blank cells to align date with day of the week
         } else {
             holder.monthDate.setText(String.valueOf(date.getDayOfMonth()));
             if (date.equals(CalendarUtils.dateSelected)) {
+                //on select, make cell turn gray
                 holder.parentView.setBackgroundColor(Color.LTGRAY);
             }
         }

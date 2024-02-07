@@ -37,29 +37,32 @@ public class EventAdapter extends ArrayAdapter<Event> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
         }
-        TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
+        //name of exam
+        TextView eventCellText = convertView.findViewById(R.id.eventCellTV);
         String eventTitle = event.getName();
 
-        TextView secondCellTV = convertView.findViewById(R.id.secondCellTV);
+        //time of exam
+        TextView secondCellText = convertView.findViewById(R.id.secondCellTV);
         String subTitle = "Exam Time: " + CalendarUtils.formattedTime(event.getTime());
 
-        TextView locationCellTV = convertView.findViewById(R.id.locationCellTV);
+        //location of exam
+        TextView locationCellText = convertView.findViewById(R.id.locationCellTV);
         String locationTitle = "Location: " + event.getEventLocation();
 
-        eventCellTV.setText(eventTitle);
+        eventCellText.setText(eventTitle);
 
-        secondCellTV.setText(subTitle);
-        locationCellTV.setText(locationTitle);
+        secondCellText.setText(subTitle);
+        locationCellText.setText(locationTitle);
         View finalConvertView = convertView;
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // Implement your delete logic here
+                //delete after long click
                 deletedList.add(event);
                 remove(event);
-                notifyDataSetChanged(); // Notify adapter about the change
+                notifyDataSetChanged();
                 Toast.makeText(getContext(), "Event deleted", Toast.LENGTH_SHORT).show();
-                return true; // Consume the long click event
+                return true;
             }
         });
 

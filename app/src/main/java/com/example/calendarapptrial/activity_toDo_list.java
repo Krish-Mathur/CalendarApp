@@ -24,9 +24,8 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
         setContentView(R.layout.activity_list_view);
         listItems = findViewById(R.id.lvItems);
 
-        TaskManager taskManager = TaskManager.getInstance(); // Initialize TaskManager
+        TaskManager taskManager = TaskManager.getInstance();
 
-        // Retrieve tasks from TaskManager
         itemsAdapter = new CustomAdapter((Context) this, (ArrayList<Task>) taskManager.getTasks());
         itemsAdapter.setOnItemClickListener(this);
         listItems.setAdapter(itemsAdapter);
@@ -39,11 +38,9 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter,
                                                    View item, int pos, long id) {
-                        // Remove the item within TaskManager at position
+                        // remove item in task manager
                         TaskManager.getInstance().removeTask(pos);
-                        // Refresh the adapter
                         itemsAdapter.notifyDataSetChanged();
-                        // Return true consumes the long click event (marks it handled)
                         return true;
                     }
                 });
@@ -51,14 +48,13 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
         listItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
-                // Edit the task when an item is clicked
+                //when item is clicked, then edit task
                 showEditTaskDialog(position);
             }
         });
     }
 
     private void showEditTaskDialog(final int position) {
-        // Retrieve the task from TaskManager based on position
         Task currentTask = TaskManager.getInstance().getTasks().get(position);
         String currentTaskDescription = currentTask.getDescription();
 
@@ -74,10 +70,9 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
             public void onClick(DialogInterface dialog, int which) {
                 String editedText = input.getText().toString();
 
-                // Update TaskManager after editing
                 TaskManager.getInstance().editTask(position, editedText);
 
-                // Refresh the adapter
+                //adapter refresh (required)
                 itemsAdapter.notifyDataSetChanged();
             }
         });
@@ -98,11 +93,11 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
         EditText etNewItem = findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
 
-        // Check if the itemText is not empty before adding
+        //check if the itemText is not empty before add
         if (!itemText.isEmpty()) {
             //itemsAdapter.add(itemText);
 
-            // Add task to TaskManager
+            //add task to TaskManager
             TaskManager.getInstance().addTask(itemText);
 
             etNewItem.setText("");
@@ -112,7 +107,7 @@ public class activity_toDo_list extends AppCompatActivity implements CustomAdapt
 
     @Override
     public void onItemClick(int position) {
-        // Handle item click here (edit task)
+        //handle item click
         showEditTaskDialog(position);
     }
     public void backToHomeToDo(View view) {
